@@ -5,20 +5,23 @@ var outer = function(){
   return function(){
     return 'The original name was ' + name;
   }
-}
-//Above you're given a function that returns another function which has a closure over the name variable.
-//Invoke outer saving the return value into another variable called 'inner'.
+};
+
+
+// Above you're given a function that returns another function which has a closure over the name variable.
+// Invoke outer saving the return value into another variable called 'inner'.
 
   //Code Here
-
+function inner() {
+  outer();
+}
 //Once you do that, invoke inner.
 
   //Code Here
-
+inner();
 
 
 //Next problem
-
 
 
 var callFriend = function(){
@@ -29,11 +32,11 @@ var callFriend = function(){
   return callF;
 };
 
+
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
   //Code Here
-
 
 
 //Next Problem
@@ -42,73 +45,115 @@ var callFriend = function(){
 
 /*
   Write a function called makeCounter that makes the following code work properly.
-*/
+*/  //Code Here
 
-  //Code Here
-  var count = makeCounter();
-  count(); // 1
-  count(); // 2
-  count(); // 3
-  count(); // 4
+function makeCounter() {
+  var one = 0;
+  return function() {
+     one = one + 1;
+    return one;
+  }
+}
 
-
-
-//Next Problem
-
-
-
-/*
-  Write a function named codeLove that returns the string 'I love code'. Write a second function named codeFriend that accepts the first function as it's first parameter. The second function should return a new third function. Store the third function in a variable, codeEcho which, when invoked, invokes the first, original function that was passed in, but will only ever do so once (returns null after first invocation).
-*/
-
-  //Code Here
+//Uncomment this once you make your function
+   var count = makeCounter();
+   count(); // 1
+   count(); // 2
+   count(); // 3
+   count(); // 4
 
 
 
 //Next Problem
 
 
-/*
-  Similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter, 'func', will be a function and the second parameter, 'N', will be a number. Now, in 'fnCounter', return an anonymous function that allows the parameter function to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
-*/
+// Inside the function called counterFactory
+// return two functions that implement up/down counter.
+// The first function is called inc, this function is responsible for incrementing the value once
+// The second function is called dec, this function is responsible for decrementing the value by one
+// You will need to use the module pattern to achieve this.
 
-  //Code Here
-  
+function counterFactory(value) {
+  return {}
 
+    // Code inc function
+    // Code dec function
 
-//Next Problem
-
-
-
-  var counter = function(){
-    for (var i=1; i<=5; i++) {
-      setTimeout( function timer(){
-          console.log( i );
-      }, i*1000 );
-    }
-  };
-
-/*
-  Above you have a function named counter. Examine the function (without running the code) then below write what you expect to happen when the function is invoked. *Hint: setTimeout calls a function or evaluates an expression after a specified number of milliseconds.
-
-    //Answer Here
+}
 
 
-  Now, run the function in your console and note what happpens.
+counter = counterFactory(10);
 
-  Was your answer right or wrong?
-
-    //Answer Here
-
-
-  Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc) (Note: No unit test for this one because of the timeout)
-*/
-
-    //Code Here
 
 
 
 //Next Problem
+
+
+// Inside the motivation function create another function called message that will return welcomeText + firstname + lastname
+
+  function motivation(firstname, lastname){
+
+    var welcomeText = 'Your doing awesome keep it up    ';
+
+    // code message function here
+
+
+    //Uncommment this to return the value of your invoked message function
+    // return message()
+  }
+
+  motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
+
+
+
+
+// Inside the return create a publicMethod property that is a function that invokes privateMethod. After you create the privateMethod
+// Invoke it by calling module.publicMethod(); outside the module scope
+
+  var module = (function() {
+    var person = {
+      name: "phillip",
+      age: 29,
+      location: 'Utah'
+    };
+
+    var privateMethod = function(){
+      return welcomeText + firstname + '  ' + lastname;
+    };
+
+    // Anything that is being returned is made public and can be invoked from outside our lexical scope
+
+    return {
+      // Code here
+    };
+
+  })();
+
+//Uncomment this after you create your public method
+//   module.publicMethod();
+
+
+
+
+// Here we have a for loop that will iterate as long as i is less than or equal to 5. What we need to do is console.log(i)
+// So that it logs ( 1 then 2 then 3, etc). Run this code in your console to see what the output is.
+
+
+  for (var i = 0; i <= 5; i++) {
+    setTimeout(function() {
+      console.log(i)
+    }, i * 1000)
+  }
+
+
+  // To make this code work you will need to create a new scope for every iteration.
+
+
+
+
+
+
 
 
 
@@ -125,4 +170,34 @@ var callFriend = function(){
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
 
+var funcArray = [
+  function() {
+    return 0;
+  },
 
+  function() {
+    return 1;
+  },
+
+  function() {
+    return 2;
+  },
+
+  function() {
+    return 3;
+  },
+
+  function() {
+    return 4;
+  },
+
+  function() {
+    return 5;
+  }
+]
+
+console.log(funcArray[0]());
+console.log(funcArray[1]());
+console.log(funcArray[2]());
+console.log(funcArray[3]());
+console.log(funcArray[4]());
